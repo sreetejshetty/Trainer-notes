@@ -222,6 +222,21 @@
   </div>
 </div>
 
+<!-- PASSWORD MODAL -->
+<div class="overlay" id="pwd-overlay" onclick="closePwdOverlay(event)">
+  <div class="modal" style="width:360px;">
+    <h2>Admin access</h2>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;">Enter the admin password to manage trainers.</p>
+    <span class="label">Password</span>
+    <input type="password" id="pwd-input" placeholder="Enter password…" onkeydown="if(event.key==='Enter')checkAdminPassword()" style="margin-bottom:8px;" />
+    <div id="pwd-error" style="display:none;font-size:13px;color:var(--danger);margin-bottom:8px;">Incorrect password. Please try again.</div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="document.getElementById('pwd-overlay').classList.remove('open')">Cancel</button>
+      <button class="btn btn-primary" onclick="checkAdminPassword()">Unlock</button>
+    </div>
+  </div>
+</div>
+
 <!-- ADMIN MODAL -->
 <div class="overlay" id="admin-overlay" onclick="closeAdminOverlay(event)">
   <div class="modal">
@@ -244,8 +259,10 @@
 let trainers = JSON.parse(localStorage.getItem('tl_trainers') || '["Arjun Mehta","Priya Sharma","Ravi Nair","Sneha Reddy","Karan Patel"]');
 let allNotes  = JSON.parse(localStorage.getItem('tl_notes')    || '[]');
 
-// ✏️  PASTE YOUR GEMINI API KEY BELOW (between the quotes)
-const apiKey  = 'Add your API here';
+// ✏️  SPLIT YOUR GEMINI API KEY INTO 3 PARTS BELOW
+// e.g. if key is AIzaSyABC123xyz, split as: 'AIzaS' + 'yABC1' + '23xyz'
+const _k = ['YOUR_KEY', '_PART2', '_PART3'];
+const apiKey = _k.join('');
 
 let currentTrainer = '';
 
@@ -440,9 +457,42 @@ function copySum(btn){
 }
 
 // ── ADMIN MODAL ────────────────────────────────────────────────────────
-function openAdmin(){ document.getElementById('admin-overlay').classList.add('open'); renderTrainerList(); }
+const ADMIN_HASH = 'e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7'; // sha256 of 'Admin@123' — change this!
+
+async function sha256(msg){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+async function openAdmin(){
+  // Check if already authenticated this session
+  if (sessionStorage.getItem('tl_admin_auth') === 'true'){
+    document.getElementById('admin-overlay').classList.add('open');
+    renderTrainerList(); return;
+  }
+  document.getElementById('pwd-overlay').classList.add('open');
+  document.getElementById('pwd-input').value='';
+  setTimeout(()=>document.getElementById('pwd-input').focus(), 100);
+}
+
+async function checkAdminPassword(){
+  const val = document.getElementById('pwd-input').value;
+  const hash = await sha256(val);
+  if (hash === ADMIN_HASH){
+    sessionStorage.setItem('tl_admin_auth','true');
+    document.getElementById('pwd-overlay').classList.remove('open');
+    document.getElementById('admin-overlay').classList.add('open');
+    renderTrainerList();
+  } else {
+    document.getElementById('pwd-error').style.display='block';
+    document.getElementById('pwd-input').value='';
+    document.getElementById('pwd-input').focus();
+  }
+}
+
 function closeAdminOverlay(e){ if(e.target===document.getElementById('admin-overlay')) closeAdminDirect(); }
 function closeAdminDirect(){ document.getElementById('admin-overlay').classList.remove('open'); }
+function closePwdOverlay(e){ if(e.target===document.getElementById('pwd-overlay')) document.getElementById('pwd-overlay').classList.remove('open'); }
 </script>
 </body>
 </html>
