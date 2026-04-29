@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Trainer Notes — Daily Log</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<title>TrainerLog — Daily Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
 <style>
   :root {
     --bg: #F7F5F0;
@@ -16,8 +16,8 @@
     --text2: #6B665E;
     --text3: #9E9990;
     --accent: #2A5C45;
+    --accent2: #1A3D2E;
     --accent-light: #E8F2ED;
-    --accent-text: #1A3D2E;
     --danger: #8B2020;
     --danger-light: #FBF0F0;
     --amber: #7A4F1A;
@@ -27,184 +27,103 @@
     --radius: 10px;
     --radius-lg: 16px;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 15px; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    font-size: 15px;
-  }
-
-  /* ── TOP BAR ── */
+  /* TOP BAR */
   .topbar {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 58px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 0 2rem; display: flex; align-items: center; justify-content: space-between;
+    height: 58px; position: sticky; top: 0; z-index: 100;
   }
-  .topbar-brand { display: flex; align-items: center; gap: 10px; }
+  .brand { display: flex; align-items: center; gap: 10px; }
   .brand-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
-  .brand-name { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text); }
+  .brand-name { font-family: 'DM Serif Display', serif; font-size: 19px; }
+  .topbar-right { display: flex; align-items: center; gap: 10px; }
   .topbar-date { font-size: 13px; color: var(--text3); }
-  .admin-btn {
-    font-size: 13px; font-weight: 500; padding: 6px 14px;
-    background: none; border: 1px solid var(--border2); border-radius: 6px;
-    color: var(--text2); cursor: pointer; transition: all 0.15s;
-  }
+  .admin-btn { font-size: 13px; font-weight: 500; padding: 6px 14px; background: none; border: 1px solid var(--border2); border-radius: 6px; color: var(--text2); cursor: pointer; }
   .admin-btn:hover { background: var(--surface2); }
 
-  /* ── LAYOUT ── */
+  /* LAYOUT */
   .layout { display: flex; min-height: calc(100vh - 58px); }
+  .sidebar { width: 280px; flex-shrink: 0; background: var(--surface); border-right: 1px solid var(--border); padding: 1.5rem 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .main { flex: 1; padding: 2rem; overflow-y: auto; }
 
-  .sidebar {
-    width: 300px; flex-shrink: 0;
-    background: var(--surface);
-    border-right: 1px solid var(--border);
-    padding: 1.5rem 1.25rem;
-    display: flex; flex-direction: column; gap: 1.25rem;
-  }
-
-  .main { flex: 1; padding: 2rem; max-width: 860px; }
-
-  /* ── LABELS ── */
-  .label {
-    font-size: 11px; font-weight: 600; letter-spacing: 0.09em;
-    text-transform: uppercase; color: var(--text3); margin-bottom: 8px;
-    display: block;
-  }
-
-  /* ── FORM ELEMENTS ── */
-  select, input, textarea {
-    width: 100%; padding: 9px 12px;
-    border: 1px solid var(--border); border-radius: var(--radius);
-    background: var(--surface); color: var(--text);
-    font-family: 'DM Sans', sans-serif; font-size: 14px;
-    outline: none; transition: border-color 0.15s;
-    appearance: none;
-  }
-  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239E9990' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+  /* ELEMENTS */
+  .label { font-size: 11px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--text3); margin-bottom: 7px; display: block; }
+  select, input, textarea { width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; outline: none; transition: border-color 0.15s; }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239E9990' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; appearance: none; }
   select:focus, input:focus, textarea:focus { border-color: var(--accent); }
-  textarea { resize: vertical; min-height: 80px; line-height: 1.55; }
+  textarea { resize: vertical; min-height: 78px; line-height: 1.55; }
 
-  /* ── BUTTONS ── */
-  .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-    padding: 9px 18px; border-radius: var(--radius); font-family: 'DM Sans', sans-serif;
-    font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.15s; border: 1px solid transparent;
-  }
-  .btn-primary { background: var(--accent); color: #fff; }
-  .btn-primary:hover { background: var(--accent-text); }
+  /* BUTTONS */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 18px; border-radius: var(--radius); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.15s; border: 1px solid transparent; }
+  .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn-primary:hover { background: var(--accent2); }
   .btn-outline { background: none; border-color: var(--border2); color: var(--text2); }
   .btn-outline:hover { background: var(--surface2); }
   .btn-danger { background: none; border-color: #E8BFBF; color: var(--danger); }
   .btn-danger:hover { background: var(--danger-light); }
   .btn-full { width: 100%; }
-  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  /* ── CARD ── */
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 1rem;
-  }
+  /* CARDS */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
   .card-title { font-family: 'DM Serif Display', serif; font-size: 17px; margin-bottom: 1rem; }
+  hr.div { border: none; border-top: 1px solid var(--border); margin: 1rem 0; }
 
-  /* ── TRAINER PILL ── */
-  .trainer-pill {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 8px 12px; border-radius: 8px;
-    background: var(--surface2); border: 1px solid var(--border);
-    font-size: 13px; margin-bottom: 6px;
-  }
-  .trainer-pill .rm-btn {
-    background: none; border: none; color: var(--text3); cursor: pointer; font-size: 13px; padding: 2px 6px; border-radius: 4px;
-  }
-  .trainer-pill .rm-btn:hover { color: var(--danger); background: var(--danger-light); }
-
-  /* ── NOTES ── */
-  .note-item {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    margin-bottom: 10px;
-    display: flex; gap: 12px; align-items: flex-start;
-    animation: fadeUp 0.2s ease both;
-  }
-  @keyframes fadeUp { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
-
-  .note-avatar {
-    width: 38px; height: 38px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 600; flex-shrink: 0;
-  }
+  /* NOTE ITEMS */
+  .note-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px; display: flex; gap: 12px; align-items: flex-start; animation: fadeUp 0.2s ease both; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:none; } }
+  .note-avatar { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
   .note-body { flex: 1; min-width: 0; }
-  .note-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; flex-wrap: wrap; gap: 6px; }
+  .note-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; margin-bottom: 4px; }
   .note-trainee { font-weight: 600; font-size: 14px; }
   .note-time { font-size: 11px; color: var(--text3); }
-  .note-trainer-tag { font-size: 11px; color: var(--text3); margin-top: 3px; }
   .note-text { font-size: 13px; color: var(--text2); line-height: 1.55; margin-top: 4px; }
   .tag { font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: 20px; }
   .del-note { background: none; border: none; color: var(--text3); cursor: pointer; font-size: 13px; padding: 2px 5px; border-radius: 4px; }
   .del-note:hover { color: var(--danger); background: var(--danger-light); }
+  .empty { text-align: center; padding: 2.5rem 1rem; color: var(--text3); font-size: 14px; border: 1.5px dashed var(--border); border-radius: var(--radius-lg); }
 
-  .empty { text-align: center; padding: 3rem 1rem; color: var(--text3); font-size: 14px; border: 1.5px dashed var(--border); border-radius: var(--radius-lg); }
+  /* STATS */
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; text-align: center; }
+  .stat-num { font-size: 22px; font-weight: 600; }
+  .stat-lbl { font-size: 11px; color: var(--text3); }
 
-  /* ── SUMMARY ── */
-  .summary-box {
-    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
-    padding: 2rem; margin-top: 1.5rem;
-  }
+  /* SUMMARY */
+  .summary-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; margin-top: 1.5rem; }
   .summary-box h2 { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 6px; }
   .summary-meta { font-size: 12px; color: var(--text3); margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
-  .summary-text { font-size: 14px; line-height: 1.85; color: var(--text2); white-space: pre-wrap; }
-
+  .summary-text { font-size: 14px; line-height: 1.85; color: var(--text2); }
   .spinner { display: inline-block; width: 13px; height: 13px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ── MODAL ── */
-  .overlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(20,18,14,0.55); z-index: 200;
-    align-items: center; justify-content: center;
-  }
-  .overlay.open { display: flex; }
-  .modal {
-    background: var(--surface); border-radius: var(--radius-lg);
-    padding: 2rem; width: 420px; max-width: 95vw;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.18);
-    animation: modalIn 0.2s ease both;
-  }
-  @keyframes modalIn { from { opacity:0; transform:scale(0.96); } to { opacity:1; transform:none; } }
-  .modal h2 { font-family: 'DM Serif Display', serif; font-size: 19px; margin-bottom: 1rem; }
-  .modal-actions { display: flex; gap: 8px; margin-top: 1rem; justify-content: flex-end; }
-
-  /* ── API KEY NOTICE ── */
-  .api-setup {
-    background: var(--amber-light); border: 1px solid #E8D5B0;
-    border-radius: var(--radius); padding: 12px 16px; margin-bottom: 1.25rem;
-    font-size: 13px; color: var(--amber);
-  }
-  .api-setup strong { font-weight: 600; }
-
-  /* ── COUNT BADGE ── */
+  /* SECTION HEAD */
+  .section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: 18px; }
   .count { display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 20px; padding: 0 6px; background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; font-size: 12px; font-weight: 600; color: var(--text2); margin-left: 6px; }
 
-  /* ── DIVIDER ── */
-  .divider { border: none; border-top: 1px solid var(--border); margin: 1rem 0; }
+  /* TRAINER PILL */
+  .trainer-pill { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-radius: 8px; background: var(--surface2); border: 1px solid var(--border); font-size: 13px; margin-bottom: 6px; }
+  .rm-btn { background: none; border: none; color: var(--text3); cursor: pointer; font-size: 13px; padding: 2px 6px; border-radius: 4px; }
+  .rm-btn:hover { color: var(--danger); background: var(--danger-light); }
 
-  .section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  /* MODAL */
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(20,18,14,0.55); z-index: 200; align-items: center; justify-content: center; }
+  .overlay.open { display: flex; }
+  .modal { background: var(--surface); border-radius: var(--radius-lg); padding: 2rem; width: 440px; max-width: 95vw; box-shadow: 0 20px 60px rgba(0,0,0,0.18); animation: modalIn 0.2s ease both; }
+  @keyframes modalIn { from { opacity:0; transform:scale(0.96); } to { opacity:1; transform:none; } }
+  .modal h2 { font-family: 'DM Serif Display', serif; font-size: 19px; margin-bottom: 1rem; }
+  .modal-actions { display: flex; gap: 8px; margin-top: 1.25rem; justify-content: flex-end; }
+
+  /* FREE BADGE */
+  .free-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 7px; background: #E8F2ED; color: #1A3D2E; border-radius: 20px; border: 1px solid #B5D9C4; margin-left: 6px; vertical-align: middle; }
+
+  /* NO TRAINER SELECTED STATE */
+  .select-prompt { text-align: center; padding: 4rem 2rem; color: var(--text3); }
+  .select-prompt .big { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--text2); margin-bottom: 8px; }
 
   @media (max-width: 680px) {
     .sidebar { display: none; }
@@ -217,12 +136,14 @@
 
 <!-- TOP BAR -->
 <div class="topbar">
-  <div class="topbar-brand">
+  <div class="brand">
     <div class="brand-dot"></div>
     <span class="brand-name">TrainerLog</span>
   </div>
-  <span class="topbar-date" id="today-date"></span>
-  <button class="admin-btn" onclick="openAdmin()">⚙ Admin</button>
+  <div class="topbar-right">
+    <span class="topbar-date" id="today-date"></span>
+    <button class="admin-btn" onclick="openAdmin()">⚙ Admin</button>
+  </div>
 </div>
 
 <!-- LAYOUT -->
@@ -231,96 +152,87 @@
   <!-- SIDEBAR -->
   <div class="sidebar">
     <div>
-      <span class="label">Your API Key</span>
-      <input type="password" id="api-key-input" placeholder="sk-ant-..." oninput="saveApiKey()" />
-      <div style="font-size:11px;color:var(--text3);margin-top:6px;">Stored in your browser only. Never shared.</div>
-    </div>
-
-    <hr class="divider" />
-
-    <div>
       <span class="label">You are</span>
-      <select id="trainer-select" onchange="saveState()">
-        <option value="">— Select trainer —</option>
+      <select id="trainer-select" onchange="onTrainerChange()">
+        <option value="">— Select your name —</option>
       </select>
     </div>
 
-    <hr class="divider" />
+    <hr class="div" />
 
     <div>
-      <span class="label">Today's stats</span>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px;">
-        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;text-align:center;">
-          <div style="font-size:22px;font-weight:600;" id="stat-notes">0</div>
-          <div style="font-size:11px;color:var(--text3);">Interactions</div>
-        </div>
-        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;text-align:center;">
-          <div style="font-size:22px;font-weight:600;" id="stat-trainees">0</div>
-          <div style="font-size:11px;color:var(--text3);">Trainees</div>
-        </div>
+      <span class="label">My stats today</span>
+      <div class="stats-grid" style="margin-top:4px;">
+        <div class="stat-box"><div class="stat-num" id="stat-notes">0</div><div class="stat-lbl">Interactions</div></div>
+        <div class="stat-box"><div class="stat-num" id="stat-trainees">0</div><div class="stat-lbl">Trainees</div></div>
       </div>
     </div>
 
-    <hr class="divider" />
+    <hr class="div" />
 
-    <button class="btn btn-danger btn-full" onclick="clearDay()">↺ Clear &amp; start fresh</button>
+    <button class="btn btn-danger btn-full" onclick="clearDay()">↺ Clear my day &amp; start fresh</button>
   </div>
 
-  <!-- MAIN AREA -->
-  <div class="main">
-
-    <!-- LOG FORM -->
-    <div class="card">
-      <div class="card-title">Log an interaction</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
-        <div>
-          <span class="label">Trainee name</span>
-          <input type="text" id="trainee-name" placeholder="e.g. Rahul Verma" />
-        </div>
-        <div>
-          <span class="label">Observation</span>
-          <select id="tone-select">
-            <option value="engaged">Engaged &amp; attentive</option>
-            <option value="excellent">Excellent performance</option>
-            <option value="distracted">Distracted / Inattentive</option>
-            <option value="slow">Slow to grasp concepts</option>
-            <option value="resistant">Resistant / Dismissive</option>
-            <option value="absent">Absent / Late</option>
-            <option value="neutral">Neutral</option>
-          </select>
-        </div>
-      </div>
-      <div style="margin-bottom:12px;">
-        <span class="label">Discussion note</span>
-        <textarea id="note-text" placeholder="Brief 1–2 line summary of what was discussed or observed…"></textarea>
-      </div>
-      <button class="btn btn-primary" onclick="addNote()">+ Add interaction</button>
+  <!-- MAIN -->
+  <div class="main" id="main-content">
+    <div class="select-prompt" id="no-trainer-msg">
+      <div class="big">Select your name to begin</div>
+      <div style="font-size:14px;">Choose your trainer name from the sidebar to log interactions and view your day.</div>
     </div>
 
-    <!-- NOTES LIST -->
-    <div class="section-head" style="margin-top:1.75rem;">
-      <div style="font-family:'DM Serif Display',serif;font-size:18px;">Today's log <span class="count" id="note-count">0</span></div>
-      <button class="btn btn-outline" onclick="summarize()" id="summarize-btn">Summarize my day ↗</button>
+    <div id="trainer-content" style="display:none;">
+      <!-- LOG FORM -->
+      <div class="card">
+        <div class="card-title">Log an interaction</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+          <div>
+            <span class="label">Trainee name</span>
+            <input type="text" id="trainee-name" placeholder="e.g. Rahul Verma" />
+          </div>
+          <div>
+            <span class="label">Observation</span>
+            <select id="tone-select">
+              <option value="engaged">Engaged &amp; attentive</option>
+              <option value="excellent">Excellent performance</option>
+              <option value="distracted">Distracted / Inattentive</option>
+              <option value="slow">Slow to grasp concepts</option>
+              <option value="resistant">Resistant / Dismissive</option>
+              <option value="absent">Absent / Late</option>
+              <option value="neutral">Neutral</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <span class="label">Discussion note</span>
+          <textarea id="note-text" placeholder="Brief 1–2 line summary of what was discussed or observed…"></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="addNote()">+ Add interaction</button>
+      </div>
+
+      <!-- NOTES LIST -->
+      <div class="section-head" style="margin-top:1.75rem;">
+        <div class="section-title">My log today <span class="count" id="note-count">0</span></div>
+        <button class="btn btn-outline" onclick="summarize()" id="summarize-btn">Summarize my day ↗</button>
+      </div>
+      <div id="notes-container"></div>
+
+      <!-- SUMMARY OUTPUT -->
+      <div id="summary-output"></div>
     </div>
-
-    <div id="notes-container"></div>
-
-    <!-- SUMMARY OUTPUT -->
-    <div id="summary-output"></div>
   </div>
 </div>
 
 <!-- ADMIN MODAL -->
-<div class="overlay" id="admin-overlay" onclick="closeAdmin(event)">
+<div class="overlay" id="admin-overlay" onclick="closeAdminOverlay(event)">
   <div class="modal">
     <h2>Manage trainers</h2>
-    <span class="label">Add trainer</span>
-    <div style="display:flex;gap:8px;margin-bottom:1rem;">
+    <span class="label">Add a trainer</span>
+    <div style="display:flex;gap:8px;margin-bottom:1.25rem;">
       <input type="text" id="new-trainer-input" placeholder="Full name" style="flex:1;" onkeydown="if(event.key==='Enter')addTrainer()" />
       <button class="btn btn-primary" onclick="addTrainer()">Add</button>
     </div>
     <span class="label">Current trainers</span>
-    <div id="trainer-list" style="max-height:240px;overflow-y:auto;"></div>
+    <div id="trainer-list" style="max-height:220px;overflow-y:auto;"></div>
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeAdminDirect()">Done</button>
     </div>
@@ -328,107 +240,121 @@
 </div>
 
 <script>
-// ── STATE ──────────────────────────────────────────────────────────
+// ── DATA ───────────────────────────────────────────────────────────────
 let trainers = JSON.parse(localStorage.getItem('tl_trainers') || '["Arjun Mehta","Priya Sharma","Ravi Nair","Sneha Reddy","Karan Patel"]');
-let notes = JSON.parse(localStorage.getItem('tl_notes') || '[]');
-let apiKey = localStorage.getItem('tl_apikey') || '';
+let allNotes  = JSON.parse(localStorage.getItem('tl_notes')    || '[]');
+
+// ✏️  PASTE YOUR GEMINI API KEY BELOW (between the quotes)
+const apiKey  = 'AIzaSyAvewdbfMBFyaTkmjgAcmxITG1-geuQ-CE';
+
+let currentTrainer = '';
 
 const AVATARS = [
-  { bg: '#E8F2ED', color: '#1A3D2E' },
-  { bg: '#EDF2FB', color: '#1A3A6B' },
-  { bg: '#FDF4E7', color: '#7A4F1A' },
-  { bg: '#FBF0F0', color: '#8B2020' },
-  { bg: '#F5F0FB', color: '#3D1A7A' },
+  { bg:'#E8F2ED', color:'#1A3D2E' },
+  { bg:'#EDF2FB', color:'#1A3A6B' },
+  { bg:'#FDF4E7', color:'#7A4F1A' },
+  { bg:'#FBF0F0', color:'#8B2020' },
+  { bg:'#F5F0FB', color:'#3D1A7A' },
 ];
 const TONES = {
-  engaged:   { label: 'Engaged',          bg: '#E8F2ED', color: '#1A3D2E' },
-  excellent: { label: 'Excellent',         bg: '#D6F0E0', color: '#0D3322' },
-  distracted:{ label: 'Inattentive',       bg: '#FDF4E7', color: '#7A4F1A' },
-  slow:      { label: 'Needs support',     bg: '#EDF2FB', color: '#1A3A6B' },
-  resistant: { label: 'Resistant',         bg: '#FBF0F0', color: '#8B2020' },
-  absent:    { label: 'Absent/Late',       bg: '#F0EDE6', color: '#5E5A54' },
-  neutral:   { label: 'Neutral',           bg: '#F0EDE6', color: '#6B665E' },
+  engaged:    { label:'Engaged',         bg:'#E8F2ED', color:'#1A3D2E' },
+  excellent:  { label:'Excellent',       bg:'#D6F0E0', color:'#0D3322' },
+  distracted: { label:'Inattentive',     bg:'#FDF4E7', color:'#7A4F1A' },
+  slow:       { label:'Needs support',   bg:'#EDF2FB', color:'#1A3A6B' },
+  resistant:  { label:'Resistant',       bg:'#FBF0F0', color:'#8B2020' },
+  absent:     { label:'Absent/Late',     bg:'#F0EDE6', color:'#5E5A54' },
+  neutral:    { label:'Neutral',         bg:'#F0EDE6', color:'#6B665E' },
 };
 
-function initials(name) { return name.trim().split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2); }
-function avatarFor(name) { let h=0; for(let c of name) h=(h*31+c.charCodeAt(0))%AVATARS.length; return AVATARS[Math.abs(h)]; }
+function initials(n){ return n.trim().split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2); }
+function avatarFor(n){ let h=0; for(let c of n) h=(h*31+c.charCodeAt(0))%AVATARS.length; return AVATARS[Math.abs(h)]; }
+function myNotes(){ return allNotes.filter(n=>n.trainer===currentTrainer); }
+function saveNotes(){ localStorage.setItem('tl_notes', JSON.stringify(allNotes)); }
+function saveTrainers(){ localStorage.setItem('tl_trainers', JSON.stringify(trainers)); }
+function saveApiKey(){ apiKey=document.getElementById('api-key-input').value.trim(); localStorage.setItem('tl_apikey',apiKey); }
 
-// ── BOOT ──────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('today-date').textContent = new Date().toLocaleDateString('en-IN', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
-  document.getElementById('api-key-input').value = apiKey;
-  renderTrainers();
-  renderNotes();
-  restoreTrainerSelect();
+// ── BOOT ───────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', ()=>{
+  document.getElementById('today-date').textContent = new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  renderTrainerDropdown();
+  const saved = localStorage.getItem('tl_selected_trainer');
+  if (saved && trainers.includes(saved)){
+    document.getElementById('trainer-select').value = saved;
+    onTrainerChange();
+  }
 });
 
-function saveApiKey() {
-  apiKey = document.getElementById('api-key-input').value.trim();
-  localStorage.setItem('tl_apikey', apiKey);
-}
-function saveState() { localStorage.setItem('tl_trainers', JSON.stringify(trainers)); }
-function restoreTrainerSelect() {
-  const saved = localStorage.getItem('tl_selected_trainer');
-  if (saved) document.getElementById('trainer-select').value = saved;
-  document.getElementById('trainer-select').addEventListener('change', e => localStorage.setItem('tl_selected_trainer', e.target.value));
+// ── TRAINER SELECTION ──────────────────────────────────────────────────
+function onTrainerChange(){
+  currentTrainer = document.getElementById('trainer-select').value;
+  localStorage.setItem('tl_selected_trainer', currentTrainer);
+  const hasTrainer = !!currentTrainer;
+  document.getElementById('no-trainer-msg').style.display   = hasTrainer ? 'none'  : 'block';
+  document.getElementById('trainer-content').style.display  = hasTrainer ? 'block' : 'none';
+  if (hasTrainer){ renderNotes(); document.getElementById('summary-output').innerHTML=''; }
 }
 
-// ── TRAINERS ──────────────────────────────────────────────────────
-function renderTrainers() {
+// ── TRAINER MANAGEMENT ─────────────────────────────────────────────────
+function renderTrainerDropdown(){
   const sel = document.getElementById('trainer-select');
   const cur = sel.value;
-  sel.innerHTML = '<option value="">— Select trainer —</option>' + trainers.map(t=>`<option value="${t}">${t}</option>`).join('');
-  if (cur) sel.value = cur;
-
-  document.getElementById('trainer-list').innerHTML = trainers.length
-    ? trainers.map((t,i)=>`<div class="trainer-pill"><span>${t}</span><button class="rm-btn" onclick="removeTrainer(${i})">✕</button></div>`).join('')
-    : '<div style="font-size:13px;color:var(--text3);padding:8px 0;">No trainers added yet.</div>';
+  sel.innerHTML = '<option value="">— Select your name —</option>' +
+    trainers.map(t=>`<option value="${t}">${t}</option>`).join('');
+  if (cur && trainers.includes(cur)) sel.value = cur;
 }
-function addTrainer() {
+function renderTrainerList(){
+  document.getElementById('trainer-list').innerHTML = trainers.length
+    ? trainers.map((t,i)=>`<div class="trainer-pill"><span>${t}</span><button class="rm-btn" onclick="removeTrainer(${i})">✕ Remove</button></div>`).join('')
+    : '<div style="font-size:13px;color:var(--text3);padding:8px 0;">No trainers yet.</div>';
+}
+function addTrainer(){
   const val = document.getElementById('new-trainer-input').value.trim();
   if (!val) return;
-  if (trainers.includes(val)) { alert('Trainer already exists.'); return; }
-  trainers.push(val); saveState(); renderTrainers();
+  if (trainers.includes(val)){ alert('Trainer already exists.'); return; }
+  trainers.push(val); saveTrainers(); renderTrainerDropdown(); renderTrainerList();
   document.getElementById('new-trainer-input').value = '';
 }
-function removeTrainer(i) {
+function removeTrainer(i){
   if (!confirm(`Remove "${trainers[i]}"?`)) return;
-  trainers.splice(i,1); saveState(); renderTrainers();
+  // Also remove their notes
+  allNotes = allNotes.filter(n=>n.trainer!==trainers[i]); saveNotes();
+  trainers.splice(i,1); saveTrainers(); renderTrainerDropdown(); renderTrainerList();
+  if (currentTrainer === trainers[i]){ currentTrainer=''; onTrainerChange(); }
 }
 
-// ── NOTES ─────────────────────────────────────────────────────────
-function addNote() {
-  const trainer = document.getElementById('trainer-select').value;
+// ── NOTES ──────────────────────────────────────────────────────────────
+function addNote(){
+  if (!currentTrainer){ alert('Please select your name first.'); return; }
   const trainee = document.getElementById('trainee-name').value.trim();
   const text    = document.getElementById('note-text').value.trim();
   const tone    = document.getElementById('tone-select').value;
-  if (!trainer) { alert('Please select your trainer name from the sidebar.'); return; }
-  if (!trainee) { alert('Please enter the trainee name.'); return; }
-  if (!text)    { alert('Please add a quick note about the interaction.'); return; }
+  if (!trainee){ alert('Please enter the trainee name.'); return; }
+  if (!text)   { alert('Please add a quick note.'); return; }
   const now = new Date();
-  notes.push({ id: Date.now(), trainer, trainee, text, tone, time: now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}) });
-  localStorage.setItem('tl_notes', JSON.stringify(notes));
-  document.getElementById('trainee-name').value = '';
-  document.getElementById('note-text').value = '';
+  allNotes.push({ id:Date.now(), trainer:currentTrainer, trainee, text, tone, time:now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}) });
+  saveNotes();
+  document.getElementById('trainee-name').value='';
+  document.getElementById('note-text').value='';
+  document.getElementById('tone-select').value='engaged';
+  document.getElementById('summary-output').innerHTML='';
   renderNotes();
 }
-function deleteNote(id) {
-  notes = notes.filter(n=>n.id!==id);
-  localStorage.setItem('tl_notes', JSON.stringify(notes));
+function deleteNote(id){
+  allNotes = allNotes.filter(n=>n.id!==id); saveNotes();
+  document.getElementById('summary-output').innerHTML='';
   renderNotes();
-  document.getElementById('summary-output').innerHTML = '';
 }
-function renderNotes() {
-  document.getElementById('note-count').textContent = notes.length;
-  document.getElementById('stat-notes').textContent = notes.length;
-  document.getElementById('stat-trainees').textContent = new Set(notes.map(n=>n.trainee)).size;
+function renderNotes(){
+  const mine = myNotes();
+  document.getElementById('note-count').textContent   = mine.length;
+  document.getElementById('stat-notes').textContent    = mine.length;
+  document.getElementById('stat-trainees').textContent = new Set(mine.map(n=>n.trainee)).size;
   const c = document.getElementById('notes-container');
-  if (!notes.length) {
-    c.innerHTML = '<div class="empty">No interactions logged yet.<br>Add your first interaction above.</div>';
-    return;
+  if (!mine.length){
+    c.innerHTML='<div class="empty">No interactions logged yet.<br>Add your first one above.</div>'; return;
   }
-  c.innerHTML = notes.map(n => {
-    const av = avatarFor(n.trainee); const tg = TONES[n.tone];
+  c.innerHTML = mine.map(n=>{
+    const av=avatarFor(n.trainee); const tg=TONES[n.tone];
     return `<div class="note-item">
       <div class="note-avatar" style="background:${av.bg};color:${av.color};">${initials(n.trainee)}</div>
       <div class="note-body">
@@ -436,89 +362,87 @@ function renderNotes() {
           <span class="note-trainee">${n.trainee} <span class="tag" style="background:${tg.bg};color:${tg.color};">${tg.label}</span></span>
           <span style="display:flex;align-items:center;gap:8px;">
             <span class="note-time">${n.time}</span>
-            <button class="del-note" onclick="deleteNote(${n.id})" title="Delete">✕</button>
+            <button class="del-note" onclick="deleteNote(${n.id})" title="Remove">✕</button>
           </span>
         </div>
         <div class="note-text">${n.text}</div>
-        <div class="note-trainer-tag">Logged by ${n.trainer}</div>
       </div>
     </div>`;
   }).join('');
 }
 
-// ── CLEAR ─────────────────────────────────────────────────────────
-function clearDay() {
-  if (!confirm('Clear all of today\'s notes and start fresh? This cannot be undone.')) return;
-  notes = [];
-  localStorage.setItem('tl_notes', JSON.stringify(notes));
-  document.getElementById('summary-output').innerHTML = '';
+// ── CLEAR DAY ──────────────────────────────────────────────────────────
+function clearDay(){
+  if (!currentTrainer) return;
+  if (!confirm(`Clear all of YOUR notes for today? This cannot be undone.`)) return;
+  allNotes = allNotes.filter(n=>n.trainer!==currentTrainer); saveNotes();
+  document.getElementById('summary-output').innerHTML='';
   renderNotes();
 }
 
-// ── SUMMARIZE ─────────────────────────────────────────────────────
-async function summarize() {
-  const trainer = document.getElementById('trainer-select').value;
-  if (!trainer) { alert('Please select your trainer name from the sidebar.'); return; }
-  if (!notes.length) { alert('No interactions logged yet. Add some notes first.'); return; }
-  if (!apiKey) { alert('Please enter your Anthropic API key in the sidebar first.'); return; }
+// ── SUMMARIZE (Gemini FREE) ────────────────────────────────────────────
+async function summarize(){
+  if (!currentTrainer){ alert('Please select your name first.'); return; }
+  const mine = myNotes();
+  if (!mine.length){ alert('No interactions logged yet.'); return; }
+  if (!apiKey || apiKey === 'YOUR_GEMINI_API_KEY_HERE'){ alert('The admin has not set up the API key yet.\n\nOpen index.html and replace YOUR_GEMINI_API_KEY_HERE with your Gemini key.'); return; }
 
   const btn = document.getElementById('summarize-btn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Generating…';
-  document.getElementById('summary-output').innerHTML = '';
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Generating…';
+  document.getElementById('summary-output').innerHTML='';
 
-  const noteLines = notes.map((n,i)=>`${i+1}. Trainee: ${n.trainee} | Observation: ${TONES[n.tone].label} | Note: ${n.text}`).join('\n');
+  const noteLines = mine.map((n,i)=>`${i+1}. Trainee: ${n.trainee} | Observation: ${TONES[n.tone].label} | Note: ${n.text}`).join('\n');
 
-  const prompt = `You are a professional training coordinator helping a corporate trainer named "${trainer}" write a polished end-of-day progress report.
+  const prompt = `You are a professional training coordinator helping a corporate trainer named "${currentTrainer}" write a polished end-of-day progress report.
 
-Here are the raw notes from today's training sessions:
+Here are the raw notes from today's sessions:
 ${noteLines}
 
-Write a professional, warm, and constructive daily training summary following these rules:
-1. Open with 1 sentence framing the day positively overall.
-2. For EACH trainee, write a short paragraph (2–4 sentences) covering what was discussed and your honest assessment.
-3. For trainees marked as "Inattentive", "Resistant", "Absent/Late", or "Needs support" — be tactful but CLEAR. Do not hide the issue. Use professional language like: "would benefit from dedicating more focus", "showed some reluctance to engage with feedback — a conversation to understand any underlying challenges may be helpful", "their late arrival impacted the flow of the session and is worth addressing".
-4. For high performers (Excellent, Engaged), acknowledge specifically what stood out.
+Write a professional, warm, and constructive daily training summary with these rules:
+1. Open with 1 sentence positively framing the day overall.
+2. For EACH trainee, write a short paragraph (2–4 sentences). Address what was discussed and give an honest assessment.
+3. For trainees marked Inattentive, Resistant, Absent/Late, or Needs Support — be tactful but CLEAR. Do not bury the concern. Use phrases like "would benefit from greater focus", "showed some reluctance to engage — a follow-up conversation may help", "their late arrival impacted session flow and warrants a brief check-in".
+4. For Excellent and Engaged trainees — acknowledge specifically what stood out.
 5. Close with 2–3 sentences of recommended next steps for the trainer.
-6. Tone: warm, professional, honest. Like a written report a training manager would read.
-7. Do NOT use bullet points. Write in flowing paragraphs, with each trainee's section introduced by their name in bold (use **Name**).`;
+6. Tone: warm, professional, honest — like a report a training manager would read.
+7. Do NOT use bullet points. Write in flowing paragraphs. Introduce each trainee's section with their name in bold using markdown **Name**.`;
 
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
-      body: JSON.stringify({ model: 'claude-opus-4-5', max_tokens: 1200, messages: [{ role:'user', content: prompt }] })
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+    const res = await fetch(url, {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify({ contents:[{ parts:[{ text: prompt }] }] })
     });
-    if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || res.statusText); }
+    if (!res.ok){ const e=await res.json(); throw new Error(e.error?.message || `HTTP ${res.status}`); }
     const data = await res.json();
-    let text = (data.content||[]).map(b=>b.text||'').join('');
-    // Render **bold** names
-    text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-    const date = new Date().toLocaleDateString('en-IN', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-    document.getElementById('summary-output').innerHTML = `
+    let text = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response received.';
+    // render **bold**
+    text = text.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+    const date = new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    document.getElementById('summary-output').innerHTML=`
       <div class="summary-box">
         <h2>Daily Training Summary</h2>
-        <div class="summary-meta">${trainer} &middot; ${date} &middot; ${notes.length} interaction${notes.length!==1?'s':''} &middot; ${new Set(notes.map(n=>n.trainee)).size} trainee${new Set(notes.map(n=>n.trainee)).size!==1?'s':''}</div>
-        <div class="summary-text">${text.replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>')}</div>
-        <hr class="divider" style="margin-top:1.5rem;" />
-        <button class="btn btn-outline" onclick="copySum(this)" style="margin-top:0.5rem;">Copy summary</button>
+        <div class="summary-meta">${currentTrainer} &middot; ${date} &middot; ${mine.length} interaction${mine.length!==1?'s':''} &middot; ${new Set(mine.map(n=>n.trainee)).size} trainee${new Set(mine.map(n=>n.trainee)).size!==1?'s':''}</div>
+        <div class="summary-text">${text}</div>
+        <hr class="div" style="margin-top:1.5rem;" />
+        <button class="btn btn-outline" onclick="copySum(this)" style="margin-top:0.25rem;">Copy summary</button>
       </div>`;
-  } catch(e) {
-    document.getElementById('summary-output').innerHTML = `<div class="summary-box" style="border-color:#E8BFBF;"><div style="color:var(--danger);font-size:14px;"><strong>Error:</strong> ${e.message}</div></div>`;
+  } catch(e){
+    document.getElementById('summary-output').innerHTML=`<div class="summary-box" style="border-color:#E8BFBF;"><div style="color:var(--danger);font-size:14px;"><strong>Error:</strong> ${e.message}<br><br><span style="color:var(--text3);font-size:13px;">Check your API key is correct and active at aistudio.google.com</span></div></div>`;
   }
-  btn.disabled = false;
-  btn.innerHTML = 'Summarize my day ↗';
+  btn.disabled=false; btn.innerHTML='Summarize my day ↗';
 }
 
-function copySum(btn) {
+function copySum(btn){
   const text = document.querySelector('.summary-text').innerText;
   navigator.clipboard.writeText(text).then(()=>{ btn.textContent='Copied!'; setTimeout(()=>btn.textContent='Copy summary',2000); });
 }
 
-// ── ADMIN MODAL ───────────────────────────────────────────────────
-function openAdmin() { document.getElementById('admin-overlay').classList.add('open'); renderTrainers(); }
-function closeAdmin(e) { if (e.target===document.getElementById('admin-overlay')) closeAdminDirect(); }
-function closeAdminDirect() { document.getElementById('admin-overlay').classList.remove('open'); }
+// ── ADMIN MODAL ────────────────────────────────────────────────────────
+function openAdmin(){ document.getElementById('admin-overlay').classList.add('open'); renderTrainerList(); }
+function closeAdminOverlay(e){ if(e.target===document.getElementById('admin-overlay')) closeAdminDirect(); }
+function closeAdminDirect(){ document.getElementById('admin-overlay').classList.remove('open'); }
 </script>
 </body>
 </html>
